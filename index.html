@@ -133,13 +133,27 @@ p{margin:0 0 1.1rem}
 .portada-foto{
   position:absolute; inset:0;
   z-index:-2;
+  display:flex;
+  gap:clamp(2px, .3vw, 4px);
+  background:var(--noche); /* se ve como la costura entre las dos fotos */
+}
+.portada-foto > div{
+  flex:1 1 50%;
   background-color:var(--noche-2);
-  /* Reemplaza el nombre del archivo por tu foto real */
+  background-size:cover;
+  background-position:center 20%;
+}
+/* Reemplaza cada URL por tu foto real. La izquierda y la derecha van descentradas
+   a propósito para que la tarjeta del medio no tape a nadie. */
+.portada-foto > div:first-child{
   background-image:
     linear-gradient(150deg, rgba(29,49,40,.3), rgba(20,33,27,.5)),
-    url("foto-portada-javiera-gonzalo.jpg");
-  background-size:cover;
-  background-position:center 30%;
+    url("foto-portada-izquierda.jpg");
+}
+.portada-foto > div:last-child{
+  background-image:
+    linear-gradient(210deg, rgba(29,49,40,.3), rgba(20,33,27,.5)),
+    url("foto-portada-derecha.jpg");
 }
 .portada-velo{
   position:absolute; inset:0;
@@ -624,9 +638,14 @@ p{margin:0 0 1.1rem}
 <body>
 
 <!-- ══════════════ 1. PORTADA ══════════════ -->
-<!-- Sube tu foto a la misma carpeta y ajusta el nombre en .portada-foto (arriba) -->
+<!-- Sube tus dos fotos a la misma carpeta y ajusta los nombres en .portada-foto (arriba).
+     Foto izquierda y foto derecha: elige fotos donde ustedes queden hacia los bordes,
+     no al centro, para que la tarjeta de abajo no los tape. -->
 <header class="portada">
-  <div class="portada-foto" role="img" aria-label="Javiera y Gonzalo"></div>
+  <div class="portada-foto" aria-hidden="true">
+    <div role="img" aria-label="Javiera y Gonzalo, foto izquierda"></div>
+    <div role="img" aria-label="Javiera y Gonzalo, foto derecha"></div>
+  </div>
   <div class="portada-velo" aria-hidden="true"></div>
 
   <div class="portada-tarjeta">
