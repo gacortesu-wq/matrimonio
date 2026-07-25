@@ -357,45 +357,48 @@ p{margin:0 0 1.1rem}
 .jornada{list-style:none; margin:0; padding:0}
 .jornada li{
   display:grid;
-  grid-template-columns:4.5rem 1fr;
-  gap:1.25rem;
+  grid-template-columns:3.8rem 2.5rem 1fr;
+  column-gap:1rem;
   position:relative;
-  padding-bottom:2.2rem;
+  padding-bottom:2.5rem;
 }
 .jornada li:last-child{padding-bottom:0}
-.jornada li::before{ /* rail vertical */
+.jornada li::before{ /* rail vertical, nace bajo cada ícono */
   content:"";
   position:absolute;
-  left:calc(4.5rem + .625rem - 1px);
-  top:1.5rem;
-  bottom:-.4rem;
+  left:calc(3.8rem + 1rem + 1.25rem - .5px);
+  top:2.5rem;
+  bottom:-1.15rem;
   width:1px;
   background:rgba(34,49,42,.18);
 }
 .jornada li:last-child::before{display:none}
 .jornada-hora{
   font-size:.72rem;
-  letter-spacing:.14em;
+  letter-spacing:.1em;
   font-weight:500;
   color:var(--vino);
-  padding-top:.45rem;
-  position:relative;
+  padding-top:.62rem;
+  text-align:right;
 }
-.jornada-hora::after{ /* punto en el rail */
-  content:"";
-  position:absolute;
-  right:-1.5rem;
-  top:.95rem;
-  width:7px; height:7px;
+.jornada-icono{
+  position:relative;
+  z-index:1;
+  width:2.5rem; height:2.5rem;
   border-radius:50%;
   background:var(--papel);
-  border:1px solid var(--vino);
+  border:1px solid rgba(122,46,56,.4);
+  color:var(--vino);
+  display:grid;
+  place-items:center;
 }
+.jornada-icono svg{width:15px; height:15px}
 .jornada h3{
   font-family:var(--display);
   font-weight:400;
   font-size:1.4rem;
   margin:0 0 .15rem;
+  padding-top:.1rem;
 }
 .jornada p{margin:0; color:var(--tinta-suave); font-size:.94rem; max-width:38ch}
 
@@ -725,6 +728,9 @@ p{margin:0 0 1.1rem}
         <ol class="jornada">
           <li>
             <span class="jornada-hora">17:30</span>
+            <span class="jornada-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="9" cy="14" r="5"/><circle cx="15" cy="14" r="5"/></svg>
+            </span>
             <div>
               <h3>Ceremonia</h3>
               <p>Al aire libre. Les pedimos llegar quince minutos antes.</p>
@@ -732,6 +738,9 @@ p{margin:0 0 1.1rem}
           </li>
           <li>
             <span class="jornada-hora">18:15</span>
+            <span class="jornada-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h14l-7 9-7-9Z"/><path d="M12 13v6M8.5 20h7"/></svg>
+            </span>
             <div>
               <h3>Cóctel</h3>
               <p>Fotos, saludos y algo para picar mientras cae la tarde.</p>
@@ -739,6 +748,9 @@ p{margin:0 0 1.1rem}
           </li>
           <li>
             <span class="jornada-hora">20:00</span>
+            <span class="jornada-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v6.5a1.5 1.5 0 0 0 3 0V3M8.5 9.5V21M17 3c-1.4 0-2.5 2.5-2.5 5.5S15.6 14 17 14v7"/></svg>
+            </span>
             <div>
               <h3>Cena</h3>
               <p>Van a encontrar su mesa a la entrada del salón.</p>
@@ -746,6 +758,9 @@ p{margin:0 0 1.1rem}
           </li>
           <li>
             <span class="jornada-hora">22:30</span>
+            <span class="jornada-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 3c.6 3.4 2.6 5.4 6 6-3.4.6-5.4 2.6-6 6-.6-3.4-2.6-5.4-6-6 3.4-.6 5.4-2.6 6-6Z"/></svg>
+            </span>
             <div>
               <h3>Fiesta</h3>
               <p>La parte importante. Vengan con zapatos que aguanten.</p>
@@ -753,6 +768,9 @@ p{margin:0 0 1.1rem}
           </li>
           <li>
             <span class="jornada-hora">03:00</span>
+            <span class="jornada-icono" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13.5A7 7 0 1 1 10.5 6a5.5 5.5 0 0 0 7.5 7.5Z"/></svg>
+            </span>
             <div>
               <h3>Cierre</h3>
               <p>Nos despedimos en la puerta.</p>
