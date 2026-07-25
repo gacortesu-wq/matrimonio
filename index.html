@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Javiera & Gonzalo · 5 de diciembre de 2026</title>
+<meta name="description" content="Toda la información de nuestro matrimonio: ceremonia, celebración, cómo llegar, dress code y confirmación de asistencia.">
+<meta property="og:title" content="Javiera & Gonzalo · Nos casamos">
+<meta property="og:description" content="5 de diciembre de 2026 · Entre Nogales, Buin, Región Metropolitana">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Karla:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   TOKENS
+   Paleta: noche de valle + papel de parte + vino
+   ============================================================ */
+:root{
+  --noche:#14211B;
+  --noche-2:#1D3128;
+  --papel:#F1EBDF;
+  --papel-2:#E6DDCC;
+  --tinta:#22312A;
+  --tinta-suave:#63736A;
+  --vino:#7A2E38;
+
+  --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --texto:"Karla", "Helvetica Neue", Arial, sans-serif;
+
+  --col:min(100% - 2.5rem, 62rem);
+  --paso:clamp(3.5rem, 11vw, 6.5rem);
+  --radio:2px;
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--texto);
+  font-weight:400;
+  font-size:1rem;
+  line-height:1.72;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%; display:block}
+a{color:inherit}
+button{font:inherit; color:inherit}
+
+:focus-visible{
+  outline:2px solid var(--vino);
+  outline-offset:3px;
+}
+
+.envoltura{width:var(--col); margin-inline:auto}
+
+/* ---- tipografía ---- */
+.eyebrow{
+  font-size:.7rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--tinta-suave);
+  margin:0 0 1.1rem;
+}
+.titulo{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2rem, 7.5vw, 3.1rem);
+  line-height:1.05;
+  letter-spacing:-.01em;
+  margin:0 0 1.25rem;
+}
+.titulo em{font-style:italic; color:var(--vino)}
+p{margin:0 0 1.1rem; max-width:44ch}
+.suelto{color:var(--tinta-suave)}
+
+/* ---- pliegue: el motivo que recorre la página ---- */
+.pliegue{
+  width:var(--col);
+  margin-inline:auto;
+  height:0;
+  border-top:1px solid rgba(34,49,42,.16);
+  box-shadow:0 1px 0 rgba(255,255,255,.85);
+}
+
+/* ---- botones ---- */
+.boton{
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  padding:.85rem 1.35rem;
+  border:1px solid var(--tinta);
+  border-radius:var(--radio);
+  background:transparent;
+  text-decoration:none;
+  font-size:.78rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:500;
+  cursor:pointer;
+  transition:background .25s ease, color .25s ease, transform .25s ease;
+}
+.boton:hover{background:var(--tinta); color:var(--papel)}
+.boton:active{transform:translateY(1px)}
+.boton--lleno{background:var(--vino); border-color:var(--vino); color:var(--papel)}
+.boton--lleno:hover{background:#5F212A; border-color:#5F212A; color:var(--papel)}
+.boton--claro{border-color:rgba(241,235,223,.5); color:var(--papel)}
+.boton--claro:hover{background:var(--papel); color:var(--noche)}
+.boton svg{width:14px; height:14px; flex:none}
+
+/* ============================================================
+   1. PORTADA — foto de pareja a pantalla completa
+   ============================================================ */
+.portada{
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  align-content:end;
+  justify-items:center;
+  padding:1.25rem 1.25rem clamp(3rem,9vw,5rem);
+  color:var(--papel);
+  overflow:hidden;
+  isolation:isolate;
+}
+.portada-foto{
+  position:absolute; inset:0;
+  z-index:-2;
+  background-color:var(--noche-2);
+  /* Reemplaza esta URL por la foto real de la pareja (misma carpeta que este archivo) */
+  background-image:
+    linear-gradient(150deg, rgba(29,49,40,.35), rgba(20,33,27,.55)),
+    url("foto-portada-javiera-gonzalo.jpg");
+  background-size:cover;
+  background-position:center 30%;
+}
+.portada-velo{
+  position:absolute; inset:0;
+  z-index:-1;
+  background:linear-gradient(180deg, rgba(20,33,27,.1) 0%, rgba(18,29,24,.18) 45%, rgba(13,21,17,.92) 100%);
+}
+.portada::after{ /* grano fílmico, sutil sobre la foto */
+  content:"";
+  position:absolute; inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.16;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>");
+}
+
+.portada-tarjeta{
+  position:relative;
+  z-index:1;
+  width:min(100%, 27rem);
+  perspective:1500px;
+}
+
+.parte{
+  position:relative;
+  background:linear-gradient(172deg, var(--papel), #E9E1D2);
+  color:var(--tinta);
+  border-radius:var(--radio);
+  padding:clamp(2.1rem,7vw,2.75rem) clamp(1.4rem,6vw,2.4rem);
+  text-align:center;
+  box-shadow:0 30px 70px -30px rgba(0,0,0,.75), 0 2px 0 rgba(255,255,255,.4) inset;
+}
+.parte-tapa{
+  position:absolute; inset:0;
+  z-index:2;
+  display:grid;
+  align-content:center;
+  gap:1.2rem;
+  border-radius:var(--radio);
+  background:linear-gradient(172deg, #EFE8DA, #DED4C2);
+  transform-origin:50% 0;
+  backface-visibility:hidden;
+  box-shadow:0 24px 40px -24px rgba(0,0,0,.6);
+  animation:levantar 1500ms cubic-bezier(.62,.02,.18,1) 500ms forwards;
+}
+.tapa-mono{
+  font-family:var(--display);
+  font-size:clamp(2rem,10vw,2.8rem);
+  line-height:1;
+  letter-spacing:.06em;
+}
+.tapa-mono em{font-style:italic; color:var(--vino)}
+.tapa-nota{
+  font-size:.62rem;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+}
+@keyframes levantar{
+  0%{transform:rotateX(0deg); opacity:1}
+  70%{opacity:1}
+  100%{transform:rotateX(-96deg); opacity:0; pointer-events:none}
+}
+
+.parte-dentro{
+  opacity:0;
+  animation:asentar 900ms ease 1300ms forwards;
+}
+@keyframes asentar{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
+
+.parte .eyebrow{margin-bottom:1.3rem}
+.nombres{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.5rem, 11vw, 3.6rem);
+  line-height:.92;
+  letter-spacing:-.015em;
+  margin:0;
+}
+.nombres em{
+  display:block;
+  font-style:italic;
+  font-size:.62em;
+  color:var(--vino);
+  margin:.05em 0;
+}
+.portada-meta{
+  margin:1.5rem auto 0;
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  max-width:none;
+}
+.portada-meta span{margin-inline:.6rem; color:var(--vino)}
+
+/* reproductor discreto */
+.cancion{
+  margin-top:1.9rem;
+  display:inline-flex;
+  align-items:center;
+  gap:.65rem;
+  background:none;
+  border:0;
+  border-bottom:1px solid rgba(34,49,42,.28);
+  padding:.35rem .1rem;
+  font-size:.66rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  cursor:pointer;
+}
+.cancion:hover{color:var(--tinta); border-color:var(--tinta)}
+.barras{display:flex; align-items:flex-end; gap:2px; height:11px}
+.barras i{width:2px; height:3px; background:currentColor; display:block}
+.cancion[aria-pressed="true"] .barras i{animation:sonar 900ms ease-in-out infinite}
+.cancion[aria-pressed="true"] .barras i:nth-child(2){animation-delay:.15s}
+.cancion[aria-pressed="true"] .barras i:nth-child(3){animation-delay:.3s}
+@keyframes sonar{0%,100%{height:3px} 50%{height:11px}}
+
+.bajar{
+  margin-top:1.6rem;
+  color:rgba(241,235,223,.65);
+  text-decoration:none;
+  font-size:.6rem;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  display:grid;
+  justify-items:center;
+  gap:.5rem;
+}
+.bajar span{width:1px; height:26px; background:linear-gradient(rgba(241,235,223,.65), transparent)}
+.bajar:hover{color:var(--papel)}
+
+/* ============================================================
+   SECCIONES DE PAPEL
+   ============================================================ */
+.seccion{padding:var(--paso) 0}
+.seccion > .envoltura > .eyebrow{margin-bottom:.9rem}
+
+/* 2. bienvenida */
+.bienvenida{text-align:center}
+.bienvenida p{margin-inline:auto}
+.completos{
+  font-family:var(--display);
+  font-size:clamp(1.05rem,3.4vw,1.3rem);
+  line-height:1.5;
+  max-width:30ch;
+  margin:0 auto 1.6rem;
+}
+
+/* 3. cuenta regresiva */
+.regresiva{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  max-width:34rem;
+  margin:2.5rem auto 0;
+}
+.regresiva div{
+  text-align:center;
+  padding:0 .3rem;
+  border-left:1px solid rgba(34,49,42,.14);
+}
+.regresiva div:first-child{border-left:0}
+.regresiva b{
+  display:block;
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.1rem,10vw,3.2rem);
+  line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.regresiva small{
+  display:block;
+  margin-top:.6rem;
+  font-size:.6rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+}
+
+/* 4. lugares */
+.lugares{
+  display:grid;
+  gap:1.25rem;
+  margin-top:2.5rem;
+}
+.tarjeta{
+  background:linear-gradient(170deg, rgba(255,255,255,.5), rgba(230,221,204,.55));
+  border:1px solid rgba(34,49,42,.13);
+  border-radius:var(--radio);
+  padding:clamp(1.6rem,5vw,2.2rem);
+}
+.tarjeta h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.65rem;
+  margin:.2rem 0 .1rem;
+}
+.hora{
+  font-size:.7rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--vino);
+  margin:0;
+}
+.direccion{margin:.9rem 0 1.4rem; color:var(--tinta-suave); font-size:.95rem}
+.nota{
+  font-size:.85rem;
+  color:var(--tinta-suave);
+  border-top:1px solid rgba(34,49,42,.12);
+  margin:1.4rem 0 0;
+  padding-top:1rem;
+}
+.transporte{margin-top:1.25rem}
+.transporte ul{margin:.9rem 0 0; padding:0; list-style:none}
+.transporte li{
+  display:flex;
+  gap:1rem;
+  padding:.7rem 0;
+  border-top:1px solid rgba(34,49,42,.1);
+  font-size:.92rem;
+}
+.transporte li b{
+  font-weight:500;
+  flex:none;
+  width:5.5rem;
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--vino);
+  padding-top:.35rem;
+}
+
+/* 5. padres */
+.padres{
+  display:grid;
+  gap:2.5rem;
+  margin-top:2.5rem;
+}
+.padres article p:first-child{
+  font-family:var(--display);
+  font-size:1.3rem;
+  line-height:1.4;
+  margin-bottom:.5rem;
+}
+.rol{
+  font-size:.64rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:var(--vino);
+  margin-bottom:.9rem;
+}
+.dedicatoria{font-style:italic; color:var(--tinta-suave); font-size:.98rem}
+.memoria{
+  margin-top:2.5rem;
+  text-align:center;
+  font-style:italic;
+  color:var(--tinta-suave);
+  font-size:.95rem;
+  max-width:38ch;
+  margin-inline:auto;
+}
+
+/* 6. dress code */
+.dress{
+  display:grid;
+  gap:1.25rem;
+  margin-top:2.5rem;
+}
+.dress .tarjeta h3{font-size:1.35rem}
+.destacado{
+  margin-top:2rem;
+  padding:1.4rem 1.6rem;
+  border-left:2px solid var(--vino);
+  background:rgba(122,46,56,.05);
+}
+.destacado p{margin:0; font-size:.95rem}
+.destacado p + p{margin-top:.6rem; color:var(--tinta-suave)}
+
+/* 7. galería */
+.galeria{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.9rem;
+  margin-top:2.5rem;
+}
+.foto{
+  position:relative;
+  aspect-ratio:4/5;
+  border:1px solid rgba(34,49,42,.13);
+  border-radius:var(--radio);
+  display:grid;
+  place-items:center;
+  overflow:hidden;
+}
+.foto::after{
+  content:attr(data-pie);
+  position:absolute;
+  bottom:.7rem; left:.8rem; right:.8rem;
+  font-size:.58rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(34,49,42,.5);
+}
+.foto span{
+  font-size:.55rem;
+  letter-spacing:.26em;
+  text-transform:uppercase;
+  color:rgba(34,49,42,.35);
+}
+.foto:nth-child(1){background:linear-gradient(150deg,#DED3BE,#C9BEA6)}
+.foto:nth-child(2){background:linear-gradient(150deg,#D6CFC0,#B6AE9B)}
+.foto:nth-child(3){background:linear-gradient(150deg,#CFC6B2,#A79E8C); grid-column:span 2; aspect-ratio:16/10}
+.foto:nth-child(4){background:linear-gradient(150deg,#E1D6C3,#BFB49E)}
+.foto:nth-child(5){background:linear-gradient(150deg,#D2C9B6,#ADA391)}
+.foto img{width:100%; height:100%; object-fit:cover}
+
+/* 8. regalos */
+.regalos{margin-top:2.5rem; display:grid; gap:1.25rem}
+.datos{margin:1rem 0 0; padding:0; font-size:.94rem}
+.datos div{
+  display:flex;
+  gap:1rem;
+  padding:.55rem 0;
+  border-top:1px solid rgba(34,49,42,.1);
+}
+.datos dt{
+  flex:none;
+  width:6.5rem;
+  font-size:.66rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  padding-top:.3rem;
+}
+.datos dd{margin:0}
+
+/* 9. confirmación */
+.rsvp{text-align:center}
+.rsvp p{margin-inline:auto}
+.limite{
+  font-family:var(--display);
+  font-size:clamp(1.5rem,5.5vw,2rem);
+  line-height:1.3;
+  max-width:22ch;
+  margin:0 auto 1.4rem;
+}
+.limite em{font-style:italic; color:var(--vino)}
+.rsvp .boton{margin-top:1.4rem}
+.pide{
+  list-style:none;
+  padding:0;
+  margin:2.2rem auto 0;
+  max-width:32rem;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:.5rem;
+}
+.pide li{
+  font-size:.68rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  border:1px solid rgba(34,49,42,.16);
+  border-radius:99px;
+  padding:.35rem .85rem;
+}
+
+/* ============================================================
+   10. CIERRE
+   ============================================================ */
+.cierre{
+  position:relative;
+  background:
+    radial-gradient(120% 90% at 50% 100%, rgba(200,170,120,.13), transparent 62%),
+    linear-gradient(178deg, var(--noche), var(--noche-2));
+  color:var(--papel);
+  text-align:center;
+  padding:clamp(4.5rem,13vw,7rem) 0 clamp(2.5rem,7vw,3.5rem);
+}
+.cierre .titulo{color:var(--papel)}
+.cierre .titulo em{color:#C79A9F}
+.gracias{
+  font-family:var(--display);
+  font-size:clamp(3.2rem,16vw,5.5rem);
+  line-height:.95;
+  margin:0 0 1.2rem;
+  max-width:none;
+}
+.cierre p{color:rgba(241,235,223,.75); margin-inline:auto}
+.creditos{
+  margin-top:clamp(3.5rem,9vw,5rem);
+  padding-top:1.5rem;
+  border-top:1px solid rgba(241,235,223,.14);
+  font-size:.62rem;
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  color:rgba(241,235,223,.4);
+}
+
+/* barra fija de confirmación (solo móvil) */
+.fija{
+  position:fixed;
+  left:0; right:0; bottom:0;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:.7rem 1.1rem;
+  background:rgba(20,33,27,.94);
+  backdrop-filter:blur(8px);
+  color:var(--papel);
+  transform:translateY(110%);
+  transition:transform .35s ease;
+}
+.fija.visible{transform:none}
+.fija small{
+  font-size:.6rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:rgba(241,235,223,.6);
+}
+.fija a{
+  text-decoration:none;
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  font-weight:500;
+  background:var(--papel);
+  color:var(--noche);
+  padding:.6rem 1rem;
+  border-radius:var(--radio);
+  flex:none;
+}
+@media (min-width:721px){.fija{display:none}}
+
+/* ============================================================
+   REVELADO AL SCROLL
+   ============================================================ */
+.revela{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease}
+.revela.dentro{opacity:1; transform:none}
+
+/* ============================================================
+   ESCRITORIO
+   ============================================================ */
+@media (min-width:721px){
+  .lugares{grid-template-columns:1fr 1fr}
+  .lugares .transporte{grid-column:1 / -1}
+  .padres{grid-template-columns:1fr 1fr; gap:3rem}
+  .dress{grid-template-columns:1fr 1fr}
+  .galeria{grid-template-columns:repeat(3,1fr)}
+  .foto:nth-child(3){grid-column:span 1; aspect-ratio:4/5}
+  .regalos{grid-template-columns:1fr 1fr}
+  .seccion{padding:var(--paso) 0}
+}
+
+/* ============================================================
+   MOVIMIENTO REDUCIDO
+   ============================================================ */
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .parte-tapa{display:none}
+  .parte-dentro{opacity:1; animation:none}
+  .revela{opacity:1; transform:none; transition:none}
+  .cancion[aria-pressed="true"] .barras i{animation:none; height:7px}
+  .fija{transition:none}
+  *{animation-duration:.001ms !important; animation-iteration-count:1 !important}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ 1. PORTADA ══════════════ -->
+<!-- Sube la foto de la pareja a la misma carpeta que este archivo y reemplaza
+     "foto-portada-javiera-gonzalo.jpg" en el CSS de .portada-foto (búscalo arriba). -->
+<header class="portada">
+  <div class="portada-foto" role="img" aria-label="Javiera y Gonzalo"></div>
+  <div class="portada-velo" aria-hidden="true"></div>
+
+  <div class="portada-tarjeta">
+    <div class="parte">
+
+      <!-- la tapa se levanta al cargar: la página continúa el parte impreso -->
+      <div class="parte-tapa" aria-hidden="true">
+        <span class="tapa-mono">J <em>&amp;</em> G</span>
+        <span class="tapa-nota">Están invitados</span>
+      </div>
+
+      <div class="parte-dentro">
+        <p class="eyebrow">Sábado 5 · diciembre · 2026</p>
+        <h1 class="nombres">Javiera <em>&amp;</em> Gonzalo</h1>
+        <p class="portada-meta">Entre Nogales<span>·</span>17:30 h</p>
+
+        <!-- Reproductor discreto. Reemplaza el src por tu archivo .mp3 -->
+        <audio id="cancion" loop preload="none">
+          <source src="nuestra-cancion.mp3" type="audio/mpeg">
+        </audio>
+        <button class="cancion" id="btnCancion" aria-pressed="false" aria-controls="cancion">
+          <span class="barras" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span id="txtCancion">Escuchar nuestra canción</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <a class="bajar" href="#nos-casamos">
+    <span aria-hidden="true"></span>
+    Desliza
+  </a>
+</header>
+
+<main>
+
+  <!-- ══════════════ 2. BIENVENIDA ══════════════ -->
+  <section class="seccion bienvenida" id="nos-casamos">
+    <div class="envoltura revela">
+      <p class="eyebrow">Nos casamos</p>
+      <h2 class="titulo">Nos encantaría que <em>estén ahí</em></h2>
+      <p class="completos">Javiera Francisca Meza Ledezma<br>y Gonzalo Alejandro Cortés Uarac</p>
+      <p class="suelto">Después de nueve años, tres mudanzas y un quiltro que manda en la casa, queremos celebrar con las personas que nos trajeron hasta acá. Guarden la fecha: nos casamos el sábado 5 de diciembre de 2026 en Entre Nogales, Buin.</p>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 3. CUENTA REGRESIVA ══════════════ -->
+  <section class="seccion" aria-labelledby="t-cuenta">
+    <div class="envoltura revela" style="text-align:center">
+      <p class="eyebrow" id="t-cuenta">Cuánto falta</p>
+      <div class="regresiva" id="regresiva" aria-live="off">
+        <div><b id="dd">—</b><small>Días</small></div>
+        <div><b id="hh">—</b><small>Horas</small></div>
+        <div><b id="mm">—</b><small>Minutos</small></div>
+        <div><b id="ss">—</b><small>Segundos</small></div>
+      </div>
+      <p class="suelto" style="margin:2rem auto 0; font-size:.9rem">Sábado 5 de diciembre de 2026, 17:30 h</p>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 4. INFORMACIÓN ESENCIAL ══════════════ -->
+  <section class="seccion" aria-labelledby="t-donde">
+    <div class="envoltura revela">
+      <p class="eyebrow">El día</p>
+      <h2 class="titulo" id="t-donde">Dónde y a qué hora</h2>
+      <p class="suelto">Ceremonia y celebración son en el mismo lugar, así que no hay que trasladarse durante la tarde. Si vienen desde Santiago, calculen una hora de viaje.</p>
+
+      <div class="lugares">
+
+        <article class="tarjeta" style="grid-column:1 / -1">
+          <p class="hora">17:30 h · Ceremonia — 19:00 h · Celebración</p>
+          <h3>Entre Nogales</h3>
+          <p class="direccion">Camino Lo Herrera 5200, Buin, Región Metropolitana</p>
+          <a class="boton" target="_blank" rel="noopener"
+             href="https://www.google.com/maps/search/?api=1&amp;query=Entre%20Nogales%2C%20Camino%20Lo%20Herrera%205200%2C%20Buin%2C%20Regi%C3%B3n%20Metropolitana">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+            Ver ubicación
+          </a>
+          <p class="nota">La ceremonia es al aire libre; les pedimos llegar 15 minutos antes. Después siguen el cóctel, la cena y la fiesta hasta las 03:00, con estacionamiento sin costo dentro del recinto.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 6. DRESS CODE ══════════════ -->
+  <section class="seccion" aria-labelledby="t-dress">
+    <div class="envoltura revela">
+      <p class="eyebrow">Qué ponerse</p>
+      <h2 class="titulo" id="t-dress">Formal, <em>elegante</em></h2>
+      <p class="suelto">Es una celebración de noche en el campo. Vayan cómodos: la idea es que bailen.</p>
+
+      <div class="dress">
+        <article class="tarjeta">
+          <h3>Ellas</h3>
+          <p class="direccion" style="margin-bottom:0">Vestido largo o midi. La ceremonia es sobre pasto de verdad, así que consideren taco ancho o una alternativa para la noche.</p>
+        </article>
+        <article class="tarjeta">
+          <h3>Ellos</h3>
+          <p class="direccion" style="margin-bottom:0">Traje oscuro con corbata. En diciembre refresca después de la puesta de sol.</p>
+        </article>
+      </div>
+
+      <div class="destacado">
+        <p><strong>El blanco está reservado para la novia.</strong> Cualquier otro color es bienvenido.</p>
+        <p>El recinto es al aire libre, así que les recomendamos traer un abrigo para cuando caiga la noche.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 7. GALERÍA ══════════════ -->
+  <section class="seccion" aria-labelledby="t-galeria">
+    <div class="envoltura revela">
+      <p class="eyebrow">Nosotros</p>
+      <h2 class="titulo" id="t-galeria">Algunos de los mejores días</h2>
+
+      <!-- Reemplaza cada bloque por: <figure class="foto"><img src="..." alt="..."></figure> -->
+      <div class="galeria">
+        <figure class="foto" data-pie="Cajón del Maipo · 2019"><span>Foto</span></figure>
+        <figure class="foto" data-pie="Chiloé · 2021"><span>Foto</span></figure>
+        <figure class="foto" data-pie="La pedida · 2025"><span>Foto</span></figure>
+        <figure class="foto" data-pie="Casa nueva · 2023"><span>Foto</span></figure>
+        <figure class="foto" data-pie="Con la familia · 2024"><span>Foto</span></figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 8. REGALOS ══════════════ -->
+  <section class="seccion" aria-labelledby="t-regalos">
+    <div class="envoltura revela">
+      <p class="eyebrow">Regalos</p>
+      <h2 class="titulo" id="t-regalos">Que estén ahí ya es <em>bastante</em></h2>
+      <p class="suelto">De verdad. Si además quieren tener un gesto con nosotros, dejamos estas dos opciones.</p>
+
+      <div class="regalos">
+        <article class="tarjeta">
+          <h3>Lista de novios</h3>
+          <p class="direccion">Armamos nuestra lista en Paris. Pueden entrar y elegir el regalo que más les acomode.</p>
+          <a class="boton" id="btnLista" target="_blank" rel="noopener" href="https://www.paris.cl/lista-de-novios/javiera-y-gonzalo">
+            Elegir un regalo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+          <p class="nota">Gracias de antemano por su generosidad.</p>
+        </article>
+
+        <article class="tarjeta">
+          <h3>Transferencia</h3>
+          <!-- ⚠︎ Completa estos datos tú directamente antes de publicar. -->
+          <p class="direccion" style="margin-bottom:0">Si prefieren esta vía:</p>
+          <dl class="datos">
+            <div><dt>Nombre</dt><dd>[completar]</dd></div>
+            <div><dt>RUT</dt><dd>[completar]</dd></div>
+            <div><dt>Banco</dt><dd>[completar]</dd></div>
+            <div><dt>Cuenta</dt><dd>[completar]</dd></div>
+            <div><dt>Correo</dt><dd>[completar]</dd></div>
+          </dl>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <div class="pliegue"></div>
+
+  <!-- ══════════════ 9. CONFIRMACIÓN ══════════════ -->
+  <section class="seccion rsvp" id="confirmar">
+    <div class="envoltura revela">
+      <p class="eyebrow">Confirmación de asistencia</p>
+      <p class="limite">Respondan antes del <em>30 de septiembre</em> de 2026</p>
+      <p class="suelto">El formulario toma dos minutos. Necesitamos una respuesta por persona invitada, incluso si van a decir que no.</p>
+
+      <!-- Reemplaza el href por el enlace real de tu formulario de Google -->
+      <a class="boton boton--lleno" href="https://forms.gle/EJEMPLO123" target="_blank" rel="noopener">
+        Confirmar asistencia
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+
+      <ul class="pide">
+        <li>Nombre y apellido</li>
+        <li>Correo</li>
+        <li>Acompañante</li>
+        <li>Restricciones alimentarias</li>
+        <li>La canción que no puede faltar</li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<!-- ══════════════ 10. CIERRE ══════════════ -->
+<footer class="cierre">
+  <div class="envoltura revela">
+    <p class="gracias">Gracias</p>
+    <p>Nos vemos el 5 de diciembre. Si tienen cualquier duda —el camino, qué ponerse— escríbannos sin problema.</p>
+    <p style="margin-top:2rem">
+      <a class="boton boton--claro" href="https://wa.me/56987654321?text=Hola!%20Tengo%20una%20consulta%20sobre%20el%20matrimonio%20de%20Javiera%20y%20Gonzalo" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+        Escribir por WhatsApp
+      </a>
+    </p>
+    <p class="creditos">Javiera &amp; Gonzalo · 05.12.2026 · Entre Nogales, Buin</p>
+  </div>
+</footer>
+
+<!-- barra fija de confirmación, solo en móvil -->
+<div class="fija" id="fija">
+  <small>Confirmen antes del 30 de septiembre</small>
+  <a href="https://forms.gle/EJEMPLO123" target="_blank" rel="noopener">Confirmar</a>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- Cuenta regresiva ---------- */
+  var FECHA = new Date("2026-12-05T17:30:00-03:00").getTime();
+  var campos = {
+    dd:document.getElementById("dd"), hh:document.getElementById("hh"),
+    mm:document.getElementById("mm"), ss:document.getElementById("ss")
+  };
+  function dos(n){ return n < 10 ? "0" + n : String(n); }
+  function tic(){
+    var falta = FECHA - Date.now();
+    if(falta <= 0){
+      var caja = document.getElementById("regresiva");
+      caja.innerHTML = '<div style="grid-column:1/-1;border:0"><b>Hoy</b><small>Nos casamos</small></div>';
+      clearInterval(reloj);
+      return;
+    }
+    var s = Math.floor(falta/1000);
+    campos.dd.textContent = Math.floor(s/86400);
+    campos.hh.textContent = dos(Math.floor(s%86400/3600));
+    campos.mm.textContent = dos(Math.floor(s%3600/60));
+    campos.ss.textContent = dos(s%60);
+  }
+  tic();
+  var reloj = setInterval(tic, 1000);
+
+  /* ---------- Canción ---------- */
+  var audio = document.getElementById("cancion");
+  var btn = document.getElementById("btnCancion");
+  var txt = document.getElementById("txtCancion");
+  btn.addEventListener("click", function(){
+    if(audio.paused){
+      var p = audio.play();
+      if(p && p.then){
+        p.then(function(){
+          btn.setAttribute("aria-pressed","true");
+          txt.textContent = "Pausar la canción";
+        }).catch(function(){
+          txt.textContent = "Canción no disponible";
+        });
+      }
+    } else {
+      audio.pause();
+      btn.setAttribute("aria-pressed","false");
+      txt.textContent = "Escuchar nuestra canción";
+    }
+  });
+
+  /* ---------- Revelado al scroll ---------- */
+  var suave = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var bloques = document.querySelectorAll(".revela");
+  if(suave && "IntersectionObserver" in window){
+    var ojo = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add("dentro"); ojo.unobserve(e.target); }
+      });
+    }, { threshold:0.12, rootMargin:"0px 0px -8% 0px" });
+    bloques.forEach(function(b){ ojo.observe(b); });
+  } else {
+    bloques.forEach(function(b){ b.classList.add("dentro"); });
+  }
+
+  /* ---------- Barra fija en móvil ---------- */
+  var fija = document.getElementById("fija");
+  var portada = document.querySelector(".portada");
+  var rsvp = document.getElementById("confirmar");
+  if("IntersectionObserver" in window){
+    var control = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if(e.target === portada) { e.isIntersecting ? fija.classList.remove("visible") : fija.classList.add("visible"); }
+        if(e.target === rsvp && e.isIntersecting) { fija.classList.remove("visible"); }
+      });
+    }, { threshold:0.05 });
+    control.observe(portada);
+    control.observe(rsvp);
+  }
+})();
+</script>
+</body>
+</html>
