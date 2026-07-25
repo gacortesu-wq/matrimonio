@@ -343,7 +343,7 @@ p{margin:0 0 1.1rem}
   line-height:1.05;
   margin:0 0 .5rem;
 }
-.lugar-dir{color:var(--tinta-suave); margin:0 0 1.5rem}
+.lugar-botones{display:flex; flex-wrap:wrap; gap:.9rem; margin:0 0 1.5rem}
 .lugar-nota{
   font-size:.88rem;
   color:var(--tinta-suave);
@@ -716,12 +716,18 @@ p{margin:0 0 1.1rem}
         <div class="lugar">
           <p class="eyebrow">Dónde</p>
           <h2 id="t-lugar">Entre Nogales</h2>
-          <p class="lugar-dir">Camino Lo Herrera 5200<br>Buin, Región Metropolitana</p>
-          <a class="boton" target="_blank" rel="noopener"
-             href="https://www.google.com/maps/search/?api=1&amp;query=Entre%20Nogales%2C%20Camino%20Lo%20Herrera%205200%2C%20Buin%2C%20Regi%C3%B3n%20Metropolitana">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
-            Ver ubicación
-          </a>
+          <div class="lugar-botones">
+            <a class="boton" target="_blank" rel="noopener"
+               href="https://www.google.com/maps/search/?api=1&amp;query=Entre%20Nogales%2C%20Camino%20Lo%20Herrera%205200%2C%20Buin%2C%20Regi%C3%B3n%20Metropolitana">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              Google Maps
+            </a>
+            <a class="boton" target="_blank" rel="noopener"
+               href="https://www.waze.com/ul?q=Entre%20Nogales%2C%20Camino%20Lo%20Herrera%205200%2C%20Buin&amp;navigate=yes">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+              Waze
+            </a>
+          </div>
           <p class="lugar-nota">Ceremonia y celebración son en el mismo lugar. Si vienen desde Santiago, calculen una hora de viaje. Hay estacionamiento sin costo dentro del recinto.</p>
         </div>
 
