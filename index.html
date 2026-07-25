@@ -16,7 +16,6 @@
 <style>
 /* ============================================================
    TOKENS
-   Paleta: noche de valle + papel de parte + vino
    ============================================================ */
 :root{
   --noche:#14211B;
@@ -26,12 +25,17 @@
   --tinta:#22312A;
   --tinta-suave:#63736A;
   --vino:#7A2E38;
+  --vino-hondo:#5F212A;
 
   --display:"Instrument Serif", "Iowan Old Style", Georgia, serif;
   --texto:"Karla", "Helvetica Neue", Arial, sans-serif;
 
-  --col:min(100% - 2.5rem, 62rem);
-  --paso:clamp(3.5rem, 11vw, 6.5rem);
+  /* tres medidas distintas: el ancho también marca el ritmo */
+  --ancha:min(100% - 2.5rem, 64rem);
+  --media:min(100% - 2.5rem, 48rem);
+  --angosta:min(100% - 2.5rem, 34rem);
+
+  --paso:clamp(4rem, 12vw, 7.5rem);
   --radio:2px;
 }
 
@@ -45,25 +49,22 @@ body{
   background:var(--papel);
   color:var(--tinta);
   font-family:var(--texto);
-  font-weight:400;
   font-size:1rem;
   line-height:1.72;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 img{max-width:100%; display:block}
 a{color:inherit}
 button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--vino); outline-offset:3px}
 
-:focus-visible{
-  outline:2px solid var(--vino);
-  outline-offset:3px;
-}
+.ancha{width:var(--ancha); margin-inline:auto}
+.media{width:var(--media); margin-inline:auto}
+.angosta{width:var(--angosta); margin-inline:auto}
 
-.envoltura{width:var(--col); margin-inline:auto}
-
-/* ---- tipografía ---- */
 .eyebrow{
-  font-size:.7rem;
+  font-size:.68rem;
   letter-spacing:.3em;
   text-transform:uppercase;
   font-weight:500;
@@ -79,19 +80,18 @@ button{font:inherit; color:inherit}
   margin:0 0 1.25rem;
 }
 .titulo em{font-style:italic; color:var(--vino)}
-p{margin:0 0 1.1rem; max-width:44ch}
+p{margin:0 0 1.1rem}
 .suelto{color:var(--tinta-suave)}
 
-/* ---- pliegue: el motivo que recorre la página ---- */
+/* el pliegue queda solo en dos lugares: deja de ser metrónomo */
 .pliegue{
-  width:var(--col);
+  width:var(--ancha);
   margin-inline:auto;
   height:0;
   border-top:1px solid rgba(34,49,42,.16);
   box-shadow:0 1px 0 rgba(255,255,255,.85);
 }
 
-/* ---- botones ---- */
 .boton{
   display:inline-flex;
   align-items:center;
@@ -101,7 +101,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   border-radius:var(--radio);
   background:transparent;
   text-decoration:none;
-  font-size:.78rem;
+  font-size:.76rem;
   letter-spacing:.16em;
   text-transform:uppercase;
   font-weight:500;
@@ -110,14 +110,14 @@ p{margin:0 0 1.1rem; max-width:44ch}
 }
 .boton:hover{background:var(--tinta); color:var(--papel)}
 .boton:active{transform:translateY(1px)}
-.boton--lleno{background:var(--vino); border-color:var(--vino); color:var(--papel)}
-.boton--lleno:hover{background:#5F212A; border-color:#5F212A; color:var(--papel)}
+.boton--papel{background:var(--papel); border-color:var(--papel); color:var(--vino-hondo)}
+.boton--papel:hover{background:transparent; color:var(--papel)}
 .boton--claro{border-color:rgba(241,235,223,.5); color:var(--papel)}
 .boton--claro:hover{background:var(--papel); color:var(--noche)}
 .boton svg{width:14px; height:14px; flex:none}
 
 /* ============================================================
-   1. PORTADA — foto de pareja a pantalla completa
+   1. PORTADA
    ============================================================ */
 .portada{
   position:relative;
@@ -134,9 +134,9 @@ p{margin:0 0 1.1rem; max-width:44ch}
   position:absolute; inset:0;
   z-index:-2;
   background-color:var(--noche-2);
-  /* Reemplaza esta URL por la foto real de la pareja (misma carpeta que este archivo) */
+  /* Reemplaza el nombre del archivo por tu foto real */
   background-image:
-    linear-gradient(150deg, rgba(29,49,40,.35), rgba(20,33,27,.55)),
+    linear-gradient(150deg, rgba(29,49,40,.3), rgba(20,33,27,.5)),
     url("foto-portada-javiera-gonzalo.jpg");
   background-size:cover;
   background-position:center 30%;
@@ -144,9 +144,9 @@ p{margin:0 0 1.1rem; max-width:44ch}
 .portada-velo{
   position:absolute; inset:0;
   z-index:-1;
-  background:linear-gradient(180deg, rgba(20,33,27,.1) 0%, rgba(18,29,24,.18) 45%, rgba(13,21,17,.92) 100%);
+  background:linear-gradient(180deg, rgba(20,33,27,.08) 0%, rgba(18,29,24,.16) 45%, rgba(13,21,17,.92) 100%);
 }
-.portada::after{ /* grano fílmico, sutil sobre la foto */
+.portada::after{
   content:"";
   position:absolute; inset:0;
   z-index:0;
@@ -155,13 +155,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)' opacity='.5'/></svg>");
 }
-
-.portada-tarjeta{
-  position:relative;
-  z-index:1;
-  width:min(100%, 27rem);
-  perspective:1500px;
-}
+.portada-tarjeta{position:relative; z-index:1; width:min(100%, 27rem); perspective:1500px}
 
 .parte{
   position:relative;
@@ -185,29 +179,15 @@ p{margin:0 0 1.1rem; max-width:44ch}
   box-shadow:0 24px 40px -24px rgba(0,0,0,.6);
   animation:levantar 1500ms cubic-bezier(.62,.02,.18,1) 500ms forwards;
 }
-.tapa-mono{
-  font-family:var(--display);
-  font-size:clamp(2rem,10vw,2.8rem);
-  line-height:1;
-  letter-spacing:.06em;
-}
+.tapa-mono{font-family:var(--display); font-size:clamp(2rem,10vw,2.8rem); line-height:1; letter-spacing:.06em}
 .tapa-mono em{font-style:italic; color:var(--vino)}
-.tapa-nota{
-  font-size:.62rem;
-  letter-spacing:.32em;
-  text-transform:uppercase;
-  color:var(--tinta-suave);
-}
+.tapa-nota{font-size:.62rem; letter-spacing:.32em; text-transform:uppercase; color:var(--tinta-suave)}
 @keyframes levantar{
   0%{transform:rotateX(0deg); opacity:1}
   70%{opacity:1}
   100%{transform:rotateX(-96deg); opacity:0; pointer-events:none}
 }
-
-.parte-dentro{
-  opacity:0;
-  animation:asentar 900ms ease 1300ms forwards;
-}
+.parte-dentro{opacity:0; animation:asentar 900ms ease 1300ms forwards}
 @keyframes asentar{from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none}}
 
 .parte .eyebrow{margin-bottom:1.3rem}
@@ -219,24 +199,16 @@ p{margin:0 0 1.1rem; max-width:44ch}
   letter-spacing:-.015em;
   margin:0;
 }
-.nombres em{
-  display:block;
-  font-style:italic;
-  font-size:.62em;
-  color:var(--vino);
-  margin:.05em 0;
-}
+.nombres em{display:block; font-style:italic; font-size:.62em; color:var(--vino); margin:.05em 0}
 .portada-meta{
   margin:1.5rem auto 0;
   font-size:.72rem;
   letter-spacing:.2em;
   text-transform:uppercase;
   color:var(--tinta-suave);
-  max-width:none;
 }
 .portada-meta span{margin-inline:.6rem; color:var(--vino)}
 
-/* reproductor discreto */
 .cancion{
   margin-top:1.9rem;
   display:inline-flex;
@@ -246,7 +218,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   border:0;
   border-bottom:1px solid rgba(34,49,42,.28);
   padding:.35rem .1rem;
-  font-size:.66rem;
+  font-size:.64rem;
   letter-spacing:.22em;
   text-transform:uppercase;
   color:var(--tinta-suave);
@@ -264,7 +236,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   margin-top:1.6rem;
   color:rgba(241,235,223,.65);
   text-decoration:none;
-  font-size:.6rem;
+  font-size:.58rem;
   letter-spacing:.3em;
   text-transform:uppercase;
   display:grid;
@@ -275,202 +247,268 @@ p{margin:0 0 1.1rem; max-width:44ch}
 .bajar:hover{color:var(--papel)}
 
 /* ============================================================
-   SECCIONES DE PAPEL
+   2. BIENVENIDA — editorial asimétrico
    ============================================================ */
-.seccion{padding:var(--paso) 0}
-.seccion > .envoltura > .eyebrow{margin-bottom:.9rem}
-
-/* 2. bienvenida */
-.bienvenida{text-align:center}
-.bienvenida p{margin-inline:auto}
-.completos{
-  font-family:var(--display);
-  font-size:clamp(1.05rem,3.4vw,1.3rem);
-  line-height:1.5;
-  max-width:30ch;
-  margin:0 auto 1.6rem;
-}
-
-/* 3. cuenta regresiva */
-.regresiva{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  max-width:34rem;
-  margin:2.5rem auto 0;
-}
-.regresiva div{
-  text-align:center;
-  padding:0 .3rem;
-  border-left:1px solid rgba(34,49,42,.14);
-}
-.regresiva div:first-child{border-left:0}
-.regresiva b{
-  display:block;
+.bienvenida{padding:var(--paso) 0 clamp(3rem,9vw,5rem)}
+.bienvenida-titular{
   font-family:var(--display);
   font-weight:400;
-  font-size:clamp(2.1rem,10vw,3.2rem);
+  font-size:clamp(2.4rem, 9vw, 4.4rem);
+  line-height:1;
+  letter-spacing:-.02em;
+  margin:0;
+}
+.bienvenida-titular em{font-style:italic; color:var(--vino)}
+.bienvenida-firma{
+  font-family:var(--display);
+  font-size:clamp(1.1rem, 3.6vw, 1.45rem);
+  line-height:1.5;
+  color:var(--tinta);
+  margin:1.75rem 0 0;
+}
+.bienvenida-texto{margin:2rem 0 0; color:var(--tinta-suave); max-width:40ch}
+
+@media (min-width:721px){
+  .bienvenida-grilla{display:grid; grid-template-columns:repeat(12,1fr); column-gap:2rem}
+  .bienvenida-titular{grid-column:1 / 10; grid-row:1}
+  .bienvenida-firma{grid-column:1 / 7; grid-row:2}
+  .bienvenida-texto{grid-column:7 / 13; grid-row:2; margin-top:1.75rem}
+}
+
+/* ============================================================
+   3. CUENTA REGRESIVA — franja oscura, conteo como frase
+   ============================================================ */
+.banda{
+  background:linear-gradient(172deg, var(--noche-2), var(--noche));
+  color:var(--papel);
+  padding:clamp(3rem,9vw,4.5rem) 0;
+  text-align:center;
+}
+.banda .eyebrow{color:rgba(241,235,223,.5)}
+.cuenta{
+  margin:0;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  align-items:baseline;
+  gap:.35rem 1.4rem;
+}
+.cuenta b{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.4rem, 11vw, 3.6rem);
   line-height:1;
   font-variant-numeric:tabular-nums;
 }
-.regresiva small{
-  display:block;
-  margin-top:.6rem;
-  font-size:.6rem;
+.cuenta i{
+  font-style:normal;
+  font-size:.66rem;
   letter-spacing:.24em;
   text-transform:uppercase;
-  color:var(--tinta-suave);
+  color:rgba(241,235,223,.55);
+  margin-left:-1rem;
+}
+.banda-fecha{
+  margin:1.8rem 0 0;
+  font-size:.72rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:rgba(241,235,223,.55);
 }
 
-/* 4. lugares */
-.lugares{
-  display:grid;
-  gap:1.25rem;
-  margin-top:2.5rem;
-}
-.tarjeta{
-  background:linear-gradient(170deg, rgba(255,255,255,.5), rgba(230,221,204,.55));
-  border:1px solid rgba(34,49,42,.13);
-  border-radius:var(--radio);
-  padding:clamp(1.6rem,5vw,2.2rem);
-}
-.tarjeta h3{
+/* ============================================================
+   4. EL DÍA — columna lateral fija + línea de tiempo
+   ============================================================ */
+.dia{padding:var(--paso) 0}
+.dia-grilla{display:grid; gap:3rem}
+
+.lugar h2{
   font-family:var(--display);
   font-weight:400;
-  font-size:1.65rem;
-  margin:.2rem 0 .1rem;
+  font-size:clamp(2rem,7vw,2.8rem);
+  line-height:1.05;
+  margin:0 0 .5rem;
 }
-.hora{
-  font-size:.7rem;
-  letter-spacing:.26em;
-  text-transform:uppercase;
+.lugar-dir{color:var(--tinta-suave); margin:0 0 1.5rem}
+.lugar-nota{
+  font-size:.88rem;
+  color:var(--tinta-suave);
+  border-top:1px solid rgba(34,49,42,.14);
+  margin:1.6rem 0 0;
+  padding-top:1rem;
+  max-width:34ch;
+}
+
+/* línea de tiempo: el orden aquí sí carga información */
+.jornada{list-style:none; margin:0; padding:0}
+.jornada li{
+  display:grid;
+  grid-template-columns:4.5rem 1fr;
+  gap:1.25rem;
+  position:relative;
+  padding-bottom:2.2rem;
+}
+.jornada li:last-child{padding-bottom:0}
+.jornada li::before{ /* rail vertical */
+  content:"";
+  position:absolute;
+  left:calc(4.5rem + .625rem - 1px);
+  top:1.5rem;
+  bottom:-.4rem;
+  width:1px;
+  background:rgba(34,49,42,.18);
+}
+.jornada li:last-child::before{display:none}
+.jornada-hora{
+  font-size:.72rem;
+  letter-spacing:.14em;
+  font-weight:500;
   color:var(--vino);
+  padding-top:.45rem;
+  position:relative;
+}
+.jornada-hora::after{ /* punto en el rail */
+  content:"";
+  position:absolute;
+  right:-1.5rem;
+  top:.95rem;
+  width:7px; height:7px;
+  border-radius:50%;
+  background:var(--papel);
+  border:1px solid var(--vino);
+}
+.jornada h3{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:1.4rem;
+  margin:0 0 .15rem;
+}
+.jornada p{margin:0; color:var(--tinta-suave); font-size:.94rem; max-width:38ch}
+
+@media (min-width:861px){
+  .dia-grilla{grid-template-columns:1fr 1.15fr; gap:4.5rem; align-items:start}
+  .lugar{position:sticky; top:clamp(2rem,8vh,4.5rem)}
+}
+
+/* ============================================================
+   5. DRESS CODE — titular fijo + notas sueltas
+   ============================================================ */
+.dress{padding:var(--paso) 0}
+.dress-grilla{display:grid; gap:2.5rem}
+.dress-titular{
+  font-family:var(--display);
+  font-weight:400;
+  font-size:clamp(2.4rem, 9vw, 4rem);
+  line-height:1;
+  letter-spacing:-.02em;
   margin:0;
 }
-.direccion{margin:.9rem 0 1.4rem; color:var(--tinta-suave); font-size:.95rem}
-.nota{
-  font-size:.85rem;
-  color:var(--tinta-suave);
-  border-top:1px solid rgba(34,49,42,.12);
-  margin:1.4rem 0 0;
-  padding-top:1rem;
-}
-.transporte{margin-top:1.25rem}
-.transporte ul{margin:.9rem 0 0; padding:0; list-style:none}
-.transporte li{
-  display:flex;
-  gap:1rem;
-  padding:.7rem 0;
-  border-top:1px solid rgba(34,49,42,.1);
-  font-size:.92rem;
-}
-.transporte li b{
-  font-weight:500;
-  flex:none;
-  width:5.5rem;
-  font-size:.68rem;
-  letter-spacing:.16em;
-  text-transform:uppercase;
-  color:var(--vino);
-  padding-top:.35rem;
-}
+.dress-titular em{font-style:italic; color:var(--vino); display:block}
 
-/* 5. padres */
-.padres{
-  display:grid;
-  gap:2.5rem;
-  margin-top:2.5rem;
-}
-.padres article p:first-child{
-  font-family:var(--display);
-  font-size:1.3rem;
-  line-height:1.4;
-  margin-bottom:.5rem;
-}
-.rol{
-  font-size:.64rem;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  color:var(--vino);
-  margin-bottom:.9rem;
-}
-.dedicatoria{font-style:italic; color:var(--tinta-suave); font-size:.98rem}
-.memoria{
-  margin-top:2.5rem;
-  text-align:center;
-  font-style:italic;
-  color:var(--tinta-suave);
-  font-size:.95rem;
-  max-width:38ch;
-  margin-inline:auto;
-}
-
-/* 6. dress code */
-.dress{
-  display:grid;
-  gap:1.25rem;
-  margin-top:2.5rem;
-}
-.dress .tarjeta h3{font-size:1.35rem}
-.destacado{
-  margin-top:2rem;
-  padding:1.4rem 1.6rem;
-  border-left:2px solid var(--vino);
-  background:rgba(122,46,56,.05);
-}
-.destacado p{margin:0; font-size:.95rem}
-.destacado p + p{margin-top:.6rem; color:var(--tinta-suave)}
-
-/* 7. galería */
-.galeria{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:.9rem;
-  margin-top:2.5rem;
-}
-.foto{
-  position:relative;
-  aspect-ratio:4/5;
-  border:1px solid rgba(34,49,42,.13);
-  border-radius:var(--radio);
-  display:grid;
-  place-items:center;
-  overflow:hidden;
-}
-.foto::after{
-  content:attr(data-pie);
-  position:absolute;
-  bottom:.7rem; left:.8rem; right:.8rem;
-  font-size:.58rem;
+.notas{list-style:none; margin:0; padding:0}
+.notas li{padding:1.3rem 0; border-top:1px solid rgba(34,49,42,.14)}
+.notas li:first-child{border-top:0; padding-top:0}
+.notas strong{
+  display:block;
+  font-size:.66rem;
   letter-spacing:.2em;
   text-transform:uppercase;
-  color:rgba(34,49,42,.5);
+  font-weight:500;
+  color:var(--vino);
+  margin-bottom:.35rem;
 }
-.foto span{
-  font-size:.55rem;
-  letter-spacing:.26em;
-  text-transform:uppercase;
-  color:rgba(34,49,42,.35);
-}
-.foto:nth-child(1){background:linear-gradient(150deg,#DED3BE,#C9BEA6)}
-.foto:nth-child(2){background:linear-gradient(150deg,#D6CFC0,#B6AE9B)}
-.foto:nth-child(3){background:linear-gradient(150deg,#CFC6B2,#A79E8C); grid-column:span 2; aspect-ratio:16/10}
-.foto:nth-child(4){background:linear-gradient(150deg,#E1D6C3,#BFB49E)}
-.foto:nth-child(5){background:linear-gradient(150deg,#D2C9B6,#ADA391)}
-.foto img{width:100%; height:100%; object-fit:cover}
+.notas p{margin:0; color:var(--tinta-suave); font-size:.96rem; max-width:44ch}
+.notas li.marcada p{color:var(--tinta)}
 
-/* 8. regalos */
-.regalos{margin-top:2.5rem; display:grid; gap:1.25rem}
-.datos{margin:1rem 0 0; padding:0; font-size:.94rem}
-.datos div{
+@media (min-width:861px){
+  .dress-grilla{grid-template-columns:.85fr 1.15fr; gap:4.5rem; align-items:start}
+  .dress-titular{position:sticky; top:clamp(2rem,8vh,4.5rem)}
+}
+
+/* ============================================================
+   6. GALERÍA — tira horizontal a sangre completa
+   ============================================================ */
+.galeria{padding:var(--paso) 0}
+.galeria-encabezado{margin-bottom:2rem}
+.tira{
   display:flex;
   gap:1rem;
-  padding:.55rem 0;
-  border-top:1px solid rgba(34,49,42,.1);
+  overflow-x:auto;
+  scroll-snap-type:x proximity;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  padding:0 max(1.25rem, calc((100% - var(--ancha))/2 + 1.25rem)) 1rem;
+  margin-inline:calc(50% - 50vw);
+  width:100vw;
 }
-.datos dt{
+.tira::-webkit-scrollbar{display:none}
+.marco{
   flex:none;
-  width:6.5rem;
+  margin:0;
+  scroll-snap-align:center;
+  height:clamp(17rem, 46vw, 25rem);
+  display:grid;
+  grid-template-rows:1fr auto;
+  gap:.7rem;
+}
+.marco > .placa{
+  border:1px solid rgba(34,49,42,.14);
+  border-radius:var(--radio);
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+  height:100%;
+}
+.marco img{width:100%; height:100%; object-fit:cover}
+.marco figcaption{
+  font-family:var(--display);
+  font-size:1.05rem;
+  letter-spacing:.06em;
+  color:var(--tinta-suave);
+  font-variant-numeric:tabular-nums;
+}
+/* formatos distintos: la tira no es una grilla */
+.marco--alto .placa{aspect-ratio:3/4}
+.marco--ancho .placa{aspect-ratio:16/10}
+.marco--cuadro .placa{aspect-ratio:1/1}
+.marco--alto  .placa{background:linear-gradient(150deg,#DED3BE,#C9BEA6)}
+.marco--ancho .placa{background:linear-gradient(150deg,#D6CFC0,#B6AE9B)}
+.marco--cuadro .placa{background:linear-gradient(150deg,#E1D6C3,#BFB49E)}
+.placa span{font-size:.55rem; letter-spacing:.26em; text-transform:uppercase; color:rgba(34,49,42,.35)}
+.tira-pista{
+  font-size:.6rem;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+  margin:1rem 0 0;
+}
+
+/* ============================================================
+   7. REGALOS — lo más callado de la página
+   ============================================================ */
+.regalos{padding:var(--paso) 0}
+.regalos .titulo{margin-bottom:1rem}
+.regalos-texto{color:var(--tinta-suave); margin-bottom:2rem}
+.regalos .boton{margin-bottom:1.4rem}
+.regalos-nota{font-size:.9rem; color:var(--tinta-suave)}
+.transferencia{
+  margin-top:2.5rem;
+  padding-top:1.75rem;
+  border-top:1px solid rgba(34,49,42,.14);
+}
+.transferencia h3{
   font-size:.66rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:500;
+  color:var(--tinta-suave);
+  margin:0 0 1rem;
+}
+.datos{margin:0; font-size:.94rem}
+.datos div{display:flex; gap:1rem; padding:.5rem 0}
+.datos dt{
+  flex:none; width:5.5rem;
+  font-size:.64rem;
   letter-spacing:.16em;
   text-transform:uppercase;
   color:var(--tinta-suave);
@@ -478,43 +516,36 @@ p{margin:0 0 1.1rem; max-width:44ch}
 }
 .datos dd{margin:0}
 
-/* 9. confirmación */
-.rsvp{text-align:center}
-.rsvp p{margin-inline:auto}
-.limite{
+/* ============================================================
+   8. CONFIRMACIÓN — franja vino, lo único que deben hacer
+   ============================================================ */
+.rsvp{
+  background:var(--vino);
+  color:var(--papel);
+  padding:clamp(4rem,13vw,6.5rem) 0;
+  text-align:center;
+}
+.rsvp .eyebrow{color:rgba(241,235,223,.6)}
+.rsvp-limite{
   font-family:var(--display);
-  font-size:clamp(1.5rem,5.5vw,2rem);
-  line-height:1.3;
-  max-width:22ch;
-  margin:0 auto 1.4rem;
+  font-weight:400;
+  font-size:clamp(2rem, 8vw, 3.2rem);
+  line-height:1.1;
+  margin:0 auto 1.2rem;
+  max-width:18ch;
 }
-.limite em{font-style:italic; color:var(--vino)}
-.rsvp .boton{margin-top:1.4rem}
-.pide{
-  list-style:none;
-  padding:0;
-  margin:2.2rem auto 0;
-  max-width:32rem;
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
-  gap:.5rem;
-}
-.pide li{
-  font-size:.68rem;
-  letter-spacing:.14em;
-  text-transform:uppercase;
-  color:var(--tinta-suave);
-  border:1px solid rgba(34,49,42,.16);
-  border-radius:99px;
-  padding:.35rem .85rem;
+.rsvp-limite em{font-style:italic; border-bottom:1px solid rgba(241,235,223,.45)}
+.rsvp-texto{
+  color:rgba(241,235,223,.75);
+  max-width:40ch;
+  margin:0 auto 2rem;
+  font-size:.96rem;
 }
 
 /* ============================================================
-   10. CIERRE
+   9. CIERRE
    ============================================================ */
 .cierre{
-  position:relative;
   background:
     radial-gradient(120% 90% at 50% 100%, rgba(200,170,120,.13), transparent 62%),
     linear-gradient(178deg, var(--noche), var(--noche-2));
@@ -522,27 +553,24 @@ p{margin:0 0 1.1rem; max-width:44ch}
   text-align:center;
   padding:clamp(4.5rem,13vw,7rem) 0 clamp(2.5rem,7vw,3.5rem);
 }
-.cierre .titulo{color:var(--papel)}
-.cierre .titulo em{color:#C79A9F}
 .gracias{
   font-family:var(--display);
   font-size:clamp(3.2rem,16vw,5.5rem);
   line-height:.95;
   margin:0 0 1.2rem;
-  max-width:none;
 }
-.cierre p{color:rgba(241,235,223,.75); margin-inline:auto}
+.cierre p{color:rgba(241,235,223,.75); margin-inline:auto; max-width:44ch}
 .creditos{
   margin-top:clamp(3.5rem,9vw,5rem);
   padding-top:1.5rem;
   border-top:1px solid rgba(241,235,223,.14);
-  font-size:.62rem;
+  font-size:.6rem;
   letter-spacing:.24em;
   text-transform:uppercase;
   color:rgba(241,235,223,.4);
 }
 
-/* barra fija de confirmación (solo móvil) */
+/* barra fija (solo móvil) */
 .fija{
   position:fixed;
   left:0; right:0; bottom:0;
@@ -559,15 +587,10 @@ p{margin:0 0 1.1rem; max-width:44ch}
   transition:transform .35s ease;
 }
 .fija.visible{transform:none}
-.fija small{
-  font-size:.6rem;
-  letter-spacing:.2em;
-  text-transform:uppercase;
-  color:rgba(241,235,223,.6);
-}
+.fija small{font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(241,235,223,.6)}
 .fija a{
   text-decoration:none;
-  font-size:.68rem;
+  font-size:.66rem;
   letter-spacing:.16em;
   text-transform:uppercase;
   font-weight:500;
@@ -579,25 +602,9 @@ p{margin:0 0 1.1rem; max-width:44ch}
 }
 @media (min-width:721px){.fija{display:none}}
 
-/* ============================================================
-   REVELADO AL SCROLL
-   ============================================================ */
+/* revelado */
 .revela{opacity:0; transform:translateY(14px); transition:opacity .7s ease, transform .7s ease}
 .revela.dentro{opacity:1; transform:none}
-
-/* ============================================================
-   ESCRITORIO
-   ============================================================ */
-@media (min-width:721px){
-  .lugares{grid-template-columns:1fr 1fr}
-  .lugares .transporte{grid-column:1 / -1}
-  .padres{grid-template-columns:1fr 1fr; gap:3rem}
-  .dress{grid-template-columns:1fr 1fr}
-  .galeria{grid-template-columns:repeat(3,1fr)}
-  .foto:nth-child(3){grid-column:span 1; aspect-ratio:4/5}
-  .regalos{grid-template-columns:1fr 1fr}
-  .seccion{padding:var(--paso) 0}
-}
 
 /* ============================================================
    MOVIMIENTO REDUCIDO
@@ -609,6 +616,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   .revela{opacity:1; transform:none; transition:none}
   .cancion[aria-pressed="true"] .barras i{animation:none; height:7px}
   .fija{transition:none}
+  .tira{scroll-behavior:auto}
   *{animation-duration:.001ms !important; animation-iteration-count:1 !important}
 }
 </style>
@@ -616,16 +624,13 @@ p{margin:0 0 1.1rem; max-width:44ch}
 <body>
 
 <!-- ══════════════ 1. PORTADA ══════════════ -->
-<!-- Sube la foto de la pareja a la misma carpeta que este archivo y reemplaza
-     "foto-portada-javiera-gonzalo.jpg" en el CSS de .portada-foto (búscalo arriba). -->
+<!-- Sube tu foto a la misma carpeta y ajusta el nombre en .portada-foto (arriba) -->
 <header class="portada">
   <div class="portada-foto" role="img" aria-label="Javiera y Gonzalo"></div>
   <div class="portada-velo" aria-hidden="true"></div>
 
   <div class="portada-tarjeta">
     <div class="parte">
-
-      <!-- la tapa se levanta al cargar: la página continúa el parte impreso -->
       <div class="parte-tapa" aria-hidden="true">
         <span class="tapa-mono">J <em>&amp;</em> G</span>
         <span class="tapa-nota">Están invitados</span>
@@ -636,7 +641,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
         <h1 class="nombres">Javiera <em>&amp;</em> Gonzalo</h1>
         <p class="portada-meta">Entre Nogales<span>·</span>17:30 h</p>
 
-        <!-- Reproductor discreto. Reemplaza el src por tu archivo .mp3 -->
+        <!-- Reemplaza el src por tu archivo .mp3 -->
         <audio id="cancion" loop preload="none">
           <source src="nuestra-cancion.mp3" type="audio/mpeg">
         </audio>
@@ -645,7 +650,6 @@ p{margin:0 0 1.1rem; max-width:44ch}
           <span id="txtCancion">Escuchar nuestra canción</span>
         </button>
       </div>
-
     </div>
   </div>
 
@@ -657,54 +661,85 @@ p{margin:0 0 1.1rem; max-width:44ch}
 
 <main>
 
-  <!-- ══════════════ 2. BIENVENIDA ══════════════ -->
-  <section class="seccion bienvenida" id="nos-casamos">
-    <div class="envoltura revela">
-      <p class="eyebrow">Nos casamos</p>
-      <h2 class="titulo">Nos encantaría que <em>estén ahí</em></h2>
-      <p class="completos">Javiera Francisca Meza Ledezma<br>y Gonzalo Alejandro Cortés Uarac</p>
-      <p class="suelto">Después de ocho años, muchos viajes y aventuras, queremos celebrar con las personas que nos trajeron hasta acá. Nos casamos el sábado 5 de diciembre de 2026 en Entre Nogales, Buin.</p>
-    </div>
-  </section>
-
-  <div class="pliegue"></div>
-
-  <!-- ══════════════ 3. CUENTA REGRESIVA ══════════════ -->
-  <section class="seccion" aria-labelledby="t-cuenta">
-    <div class="envoltura revela" style="text-align:center">
-      <p class="eyebrow" id="t-cuenta">Cuánto falta</p>
-      <div class="regresiva" id="regresiva" aria-live="off">
-        <div><b id="dd">—</b><small>Días</small></div>
-        <div><b id="hh">—</b><small>Horas</small></div>
-        <div><b id="mm">—</b><small>Minutos</small></div>
-        <div><b id="ss">—</b><small>Segundos</small></div>
+  <!-- ══════════════ 2. BIENVENIDA — asimétrica ══════════════ -->
+  <section class="bienvenida" id="nos-casamos">
+    <div class="ancha revela">
+      <div class="bienvenida-grilla">
+        <h2 class="bienvenida-titular">Nos casamos, y nos<br>encantaría que <em>estén ahí</em></h2>
+        <p class="bienvenida-firma">Javiera Francisca Meza Ledezma<br>y Gonzalo Alejandro Cortés Uarac</p>
+        <p class="bienvenida-texto">Después de ocho años, muchos viajes y aventuras, queremos celebrar con las personas que nos trajeron hasta acá. Acá abajo está todo lo que necesitan saber del día.</p>
       </div>
-      <p class="suelto" style="margin:2rem auto 0; font-size:.9rem">Sábado 5 de diciembre de 2026, 17:30 h</p>
     </div>
   </section>
 
-  <div class="pliegue"></div>
+  <!-- ══════════════ 3. CUENTA REGRESIVA — franja oscura ══════════════ -->
+  <section class="banda" aria-labelledby="t-cuenta">
+    <div class="media">
+      <p class="eyebrow" id="t-cuenta">Cuánto falta</p>
+      <p class="cuenta" id="cuenta" aria-live="off">
+        <b id="dd">—</b><i>días</i>
+        <b id="hh">—</b><i>horas</i>
+        <b id="mm">—</b><i>min</i>
+        <b id="ss">—</b><i>seg</i>
+      </p>
+      <p class="banda-fecha">Sábado 5 de diciembre de 2026 · 17:30 h</p>
+    </div>
+  </section>
 
-  <!-- ══════════════ 4. INFORMACIÓN ESENCIAL ══════════════ -->
-  <section class="seccion" aria-labelledby="t-donde">
-    <div class="envoltura revela">
-      <p class="eyebrow">El día</p>
-      <h2 class="titulo" id="t-donde">Dónde y a qué hora</h2>
-      <p class="suelto">Ceremonia y celebración son en el mismo lugar, así que no hay que trasladarse durante la tarde. Si vienen desde Santiago, calculen una hora de viaje.</p>
+  <!-- ══════════════ 4. EL DÍA — lateral fijo + línea de tiempo ══════════════ -->
+  <section class="dia" aria-labelledby="t-lugar">
+    <div class="ancha revela">
+      <div class="dia-grilla">
 
-      <div class="lugares">
-
-        <article class="tarjeta" style="grid-column:1 / -1">
-          <p class="hora">17:30 h · Ceremonia — 19:00 h · Celebración</p>
-          <h3>Entre Nogales</h3>
-          <p class="direccion">Camino Lo Herrera 5200, Buin, Región Metropolitana</p>
+        <div class="lugar">
+          <p class="eyebrow">Dónde</p>
+          <h2 id="t-lugar">Entre Nogales</h2>
+          <p class="lugar-dir">Camino Lo Herrera 5200<br>Buin, Región Metropolitana</p>
           <a class="boton" target="_blank" rel="noopener"
              href="https://www.google.com/maps/search/?api=1&amp;query=Entre%20Nogales%2C%20Camino%20Lo%20Herrera%205200%2C%20Buin%2C%20Regi%C3%B3n%20Metropolitana">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
             Ver ubicación
           </a>
-          <p class="nota">La ceremonia es al aire libre; les pedimos llegar 15 minutos antes. Después siguen el cóctel, la cena y la fiesta hasta las 03:00, con estacionamiento sin costo dentro del recinto.</p>
-        </article>
+          <p class="lugar-nota">Ceremonia y celebración son en el mismo lugar. Si vienen desde Santiago, calculen una hora de viaje. Hay estacionamiento sin costo dentro del recinto.</p>
+        </div>
+
+        <ol class="jornada">
+          <li>
+            <span class="jornada-hora">17:30</span>
+            <div>
+              <h3>Ceremonia</h3>
+              <p>Al aire libre. Les pedimos llegar quince minutos antes.</p>
+            </div>
+          </li>
+          <li>
+            <span class="jornada-hora">18:15</span>
+            <div>
+              <h3>Cóctel</h3>
+              <p>Fotos, saludos y algo para picar mientras cae la tarde.</p>
+            </div>
+          </li>
+          <li>
+            <span class="jornada-hora">20:00</span>
+            <div>
+              <h3>Cena</h3>
+              <p>Van a encontrar su mesa a la entrada del salón.</p>
+            </div>
+          </li>
+          <li>
+            <span class="jornada-hora">22:30</span>
+            <div>
+              <h3>Fiesta</h3>
+              <p>La parte importante. Vengan con zapatos que aguanten.</p>
+            </div>
+          </li>
+          <li>
+            <span class="jornada-hora">03:00</span>
+            <div>
+              <h3>Cierre</h3>
+              <p>Nos despedimos en la puerta.</p>
+            </div>
+          </li>
+        </ol>
 
       </div>
     </div>
@@ -712,115 +747,136 @@ p{margin:0 0 1.1rem; max-width:44ch}
 
   <div class="pliegue"></div>
 
-  <!-- ══════════════ 6. DRESS CODE ══════════════ -->
-  <section class="seccion" aria-labelledby="t-dress">
-    <div class="envoltura revela">
-      <p class="eyebrow">Qué ponerse</p>
-      <h2 class="titulo" id="t-dress">Formal, <em>elegante</em></h2>
-      <p class="suelto">Es una celebración de noche en el campo. Vayan cómodos: la idea es que bailen.</p>
+  <!-- ══════════════ 5. DRESS CODE — titular fijo + notas ══════════════ -->
+  <section class="dress" aria-labelledby="t-dress">
+    <div class="ancha revela">
+      <div class="dress-grilla">
+        <h2 class="dress-titular" id="t-dress">Formal,<em>elegante</em></h2>
 
-      <div class="dress">
-        <article class="tarjeta">
-          <h3>Ellas</h3>
-          <p class="direccion" style="margin-bottom:0">Vestido largo o midi. La ceremonia es sobre pasto de verdad, así que consideren taco ancho o una alternativa para la noche.</p>
-        </article>
-        <article class="tarjeta">
-          <h3>Ellos</h3>
-          <p class="direccion" style="margin-bottom:0">Traje oscuro con corbata. En diciembre refresca después de la puesta de sol.</p>
-        </article>
-      </div>
-
-      <div class="destacado">
-        <p><strong>El blanco está reservado para la novia.</strong> Cualquier otro color es bienvenido.</p>
-        <p>El recinto es al aire libre, así que les recomendamos traer un abrigo para cuando caiga la noche.</p>
+        <ul class="notas">
+          <li>
+            <strong>Ellas</strong>
+            <p>Vestido largo o midi. La ceremonia es sobre pasto de verdad, así que consideren taco ancho o una alternativa para la noche.</p>
+          </li>
+          <li>
+            <strong>Ellos</strong>
+            <p>Traje oscuro con corbata.</p>
+          </li>
+          <li class="marcada">
+            <strong>Un favor</strong>
+            <p>El blanco está reservado para la novia. Cualquier otro color es bienvenido.</p>
+          </li>
+          <li class="marcada">
+            <strong>Ojo con la noche</strong>
+            <p>El recinto es al aire libre y en diciembre refresca apenas se pone el sol. Traigan un abrigo.</p>
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 
   <div class="pliegue"></div>
 
-  <!-- ══════════════ 7. GALERÍA ══════════════ -->
-  <section class="seccion" aria-labelledby="t-galeria">
-    <div class="envoltura revela">
+  <!-- ══════════════ 6. GALERÍA — tira horizontal ══════════════ -->
+  <section class="galeria" aria-labelledby="t-galeria">
+    <div class="ancha revela galeria-encabezado">
       <p class="eyebrow">Nosotros</p>
-      <h2 class="titulo" id="t-galeria">Algunos de los mejores días</h2>
+      <h2 class="titulo" id="t-galeria">Algunos de los <em>mejores días</em></h2>
+    </div>
 
-      <!-- Reemplaza cada bloque por: <figure class="foto"><img src="..." alt="..."></figure> -->
-      <div class="galeria">
-        <figure class="foto" data-pie="Cajón del Maipo · 2019"><span>Foto</span></figure>
-        <figure class="foto" data-pie="Chiloé · 2021"><span>Foto</span></figure>
-        <figure class="foto" data-pie="La pedida · 2025"><span>Foto</span></figure>
-        <figure class="foto" data-pie="Casa nueva · 2023"><span>Foto</span></figure>
-        <figure class="foto" data-pie="Con la familia · 2024"><span>Foto</span></figure>
-      </div>
+    <!-- Reemplaza cada .placa por: <div class="placa"><img src="..." alt="..."></div> -->
+    <div class="tira" role="region" aria-label="Fotos de Javiera y Gonzalo, año por año" tabindex="0">
+      <figure class="marco marco--alto">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2018</figcaption>
+      </figure>
+      <figure class="marco marco--ancho">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2019</figcaption>
+      </figure>
+      <figure class="marco marco--cuadro">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2020</figcaption>
+      </figure>
+      <figure class="marco marco--alto">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2021</figcaption>
+      </figure>
+      <figure class="marco marco--ancho">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2022</figcaption>
+      </figure>
+      <figure class="marco marco--cuadro">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2023</figcaption>
+      </figure>
+      <figure class="marco marco--alto">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2024</figcaption>
+      </figure>
+      <figure class="marco marco--ancho">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2025</figcaption>
+      </figure>
+      <figure class="marco marco--cuadro">
+        <div class="placa"><span>Foto</span></div>
+        <figcaption>2026</figcaption>
+      </figure>
+    </div>
+
+    <div class="ancha">
+      <p class="tira-pista">Desliza para ver más →</p>
     </div>
   </section>
 
   <div class="pliegue"></div>
 
-  <!-- ══════════════ 8. REGALOS ══════════════ -->
-  <section class="seccion" aria-labelledby="t-regalos">
-    <div class="envoltura revela">
+  <!-- ══════════════ 7. REGALOS — columna angosta, sin tarjetas ══════════════ -->
+  <section class="regalos" aria-labelledby="t-regalos">
+    <div class="angosta revela">
       <p class="eyebrow">Regalos</p>
       <h2 class="titulo" id="t-regalos">Que estén ahí ya es <em>bastante</em></h2>
-      <p class="suelto">De verdad. Si además quieren tener un gesto con nosotros, dejamos estas dos opciones.</p>
+      <p class="regalos-texto">De verdad. Si además quieren tener un gesto con nosotros, armamos una lista en Paris.</p>
 
-      <div class="regalos">
-        <article class="tarjeta">
-          <h3>Lista de novios</h3>
-          <p class="direccion">Armamos nuestra lista en Paris. Pueden entrar y elegir el regalo que más les acomode.</p>
-          <a class="boton" id="btnLista" target="_blank" rel="noopener" href="https://www.paris.cl/lista-de-novios/javiera-y-gonzalo">
-            Elegir un regalo
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-          </a>
-          <p class="nota">Gracias de antemano por su generosidad.</p>
-        </article>
+      <a class="boton" target="_blank" rel="noopener" href="https://www.paris.cl/lista-de-novios/javiera-y-gonzalo">
+        Elegir un regalo
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+      </a>
+      <p class="regalos-nota">Gracias de antemano por su generosidad.</p>
 
-        <article class="tarjeta">
-          <h3>Transferencia</h3>
-          <!-- ⚠︎ Completa estos datos tú directamente antes de publicar. -->
-          <p class="direccion" style="margin-bottom:0">Si prefieren esta vía:</p>
-          <dl class="datos">
-            <div><dt>Nombre</dt><dd>[completar]</dd></div>
-            <div><dt>RUT</dt><dd>[completar]</dd></div>
-            <div><dt>Banco</dt><dd>[completar]</dd></div>
-            <div><dt>Cuenta</dt><dd>[completar]</dd></div>
-            <div><dt>Correo</dt><dd>[completar]</dd></div>
-          </dl>
-        </article>
+      <div class="transferencia">
+        <h3>O por transferencia</h3>
+        <!-- ⚠︎ Completa estos datos tú antes de publicar -->
+        <dl class="datos">
+          <div><dt>Nombre</dt><dd>[completar]</dd></div>
+          <div><dt>RUT</dt><dd>[completar]</dd></div>
+          <div><dt>Banco</dt><dd>[completar]</dd></div>
+          <div><dt>Cuenta</dt><dd>[completar]</dd></div>
+          <div><dt>Correo</dt><dd>[completar]</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
-  <div class="pliegue"></div>
-
-  <!-- ══════════════ 9. CONFIRMACIÓN ══════════════ -->
-  <section class="seccion rsvp" id="confirmar">
-    <div class="envoltura revela">
+  <!-- ══════════════ 8. CONFIRMACIÓN — franja vino ══════════════ -->
+  <section class="rsvp" id="confirmar">
+    <div class="media revela">
       <p class="eyebrow">Confirmación de asistencia</p>
-      <p class="limite">Respondan antes del <em>30 de septiembre</em> de 2026</p>
-      <p class="suelto">El formulario toma dos minutos. Necesitamos una respuesta por persona invitada, incluso si van a decir que no.</p>
+      <p class="rsvp-limite">Respondan antes del <em>30 de octubre</em></p>
+      <p class="rsvp-texto">El formulario toma dos minutos. Necesitamos una respuesta por persona invitada, incluso si van a decir que no.</p>
 
       <!-- Reemplaza el href por el enlace real de tu formulario de Google -->
-      <a class="boton boton--lleno" href="https://forms.gle/EJEMPLO123" target="_blank" rel="noopener">
+      <a class="boton boton--papel" href="https://forms.gle/EJEMPLO123" target="_blank" rel="noopener">
         Confirmar asistencia
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
       </a>
-
-      <ul class="pide">
-        <li>Nombre y apellido</li>
-        <li>Correo</li>
-        <li>Acompañante</li>
-        <li>Restricciones alimentarias</li>
-        <li>La canción que no puede faltar</li>
-      </ul>
     </div>
   </section>
 </main>
 
-<!-- ══════════════ 10. CIERRE ══════════════ -->
+<!-- ══════════════ 9. CIERRE ══════════════ -->
 <footer class="cierre">
-  <div class="envoltura revela">
+  <div class="media revela">
     <p class="gracias">Gracias</p>
     <p>Nos vemos el 5 de diciembre. Si tienen cualquier duda —el camino, qué ponerse— escríbannos sin problema.</p>
     <p style="margin-top:2rem">
@@ -833,9 +889,8 @@ p{margin:0 0 1.1rem; max-width:44ch}
   </div>
 </footer>
 
-<!-- barra fija de confirmación, solo en móvil -->
 <div class="fija" id="fija">
-  <small>Confirmen antes del 30 de septiembre</small>
+  <small>Confirmen antes del 30 de octubre</small>
   <a href="https://forms.gle/EJEMPLO123" target="_blank" rel="noopener">Confirmar</a>
 </div>
 
@@ -853,8 +908,7 @@ p{margin:0 0 1.1rem; max-width:44ch}
   function tic(){
     var falta = FECHA - Date.now();
     if(falta <= 0){
-      var caja = document.getElementById("regresiva");
-      caja.innerHTML = '<div style="grid-column:1/-1;border:0"><b>Hoy</b><small>Nos casamos</small></div>';
+      document.getElementById("cuenta").innerHTML = "<b>Hoy</b><i>nos casamos</i>";
       clearInterval(reloj);
       return;
     }
@@ -916,6 +970,16 @@ p{margin:0 0 1.1rem; max-width:44ch}
     }, { threshold:0.05 });
     control.observe(portada);
     control.observe(rsvp);
+  }
+
+  /* ---------- Oculta la pista de la tira al desplazarla ---------- */
+  var tira = document.querySelector(".tira");
+  var pista = document.querySelector(".tira-pista");
+  if(tira && pista){
+    tira.addEventListener("scroll", function(){
+      if(tira.scrollLeft > 24){ pista.style.opacity = "0"; }
+    }, { passive:true });
+    pista.style.transition = "opacity .4s ease";
   }
 })();
 </script>
