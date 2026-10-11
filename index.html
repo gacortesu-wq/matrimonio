@@ -360,6 +360,21 @@ p{margin:0 0 1.1rem}
   max-width:46ch;
   margin-inline:auto;
 }
+.lugar-horario{
+  list-style:none;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:1.6rem 0 0;
+  padding:0;
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+}
+.lugar-horario li{padding:0 1.1rem; border-left:1px solid rgba(34,49,42,.18)}
+.lugar-horario li:first-child{border-left:0}
+.lugar-horario span{margin-inline:.5rem; color:var(--vino)}
 
 /* ============================================================
    5. DRESS CODE — titular fijo + notas sueltas
@@ -680,6 +695,11 @@ p{margin:0 0 1.1rem}
             </a>
           </div>
           <p class="lugar-nota">La ceremonia y celebración se realizarán en Buin.<br>Si vienen desde Santiago, les recomendamos considerar una hora de viaje. El recinto cuenta con estacionamiento gratuito.</p>
+          <ul class="lugar-horario">
+            <li>Ceremonia<span>·</span>17:00 hrs</li>
+            <li>Fiesta<span>·</span>22:00 hrs</li>
+            <li>Cierre<span>·</span>03:30 hrs</li>
+          </ul>
         </div>
 
       </div>
