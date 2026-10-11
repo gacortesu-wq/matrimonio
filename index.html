@@ -341,7 +341,7 @@ p{margin:0 0 1.1rem}
 .dia{padding:var(--paso) 0}
 .dia-grilla{display:grid; gap:3rem}
 
-.lugar{max-width:52ch; margin-inline:auto; text-align:center}
+.lugar{width:100%; max-width:52ch; margin-inline:auto; min-width:0; text-align:center}
 .lugar h2{
   font-family:var(--display);
   font-weight:400;
@@ -360,6 +360,29 @@ p{margin:0 0 1.1rem}
   max-width:46ch;
   margin-inline:auto;
 }
+.lugar-horario{
+  list-style:none;
+  display:flex;
+  flex-wrap:nowrap;
+  justify-content:center;
+  margin:1.6rem 0 0;
+  padding:0;
+  font-size:clamp(.52rem, 2.4vw, .72rem);
+  letter-spacing:clamp(.09em, 1.4vw, .2em);
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+}
+.lugar-horario li{padding:0 clamp(.5rem, 2vw, 1.1rem); border-left:1px solid rgba(34,49,42,.18); white-space:nowrap}
+.lugar-horario li:first-child{border-left:0; padding-left:0}
+.lugar-horario span{margin-inline:clamp(.25rem, 1vw, .5rem); color:var(--vino)}
+.lugar-horario-cierre{
+  margin:.9rem 0 0;
+  font-size:.72rem;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--tinta-suave);
+}
+.lugar-horario-cierre span{margin-inline:.5rem; color:var(--vino)}
 
 /* ============================================================
    5. DRESS CODE — titular fijo + notas sueltas
@@ -680,6 +703,11 @@ p{margin:0 0 1.1rem}
             </a>
           </div>
           <p class="lugar-nota">La ceremonia y celebración se realizarán en Buin.<br>Si vienen desde Santiago, les recomendamos considerar una hora de viaje. El recinto cuenta con estacionamiento gratuito.</p>
+          <ul class="lugar-horario">
+            <li>Ceremonia<span>·</span>17:00 hrs</li>
+            <li>Fiesta<span>·</span>22:00 hrs</li>
+          </ul>
+          <p class="lugar-horario-cierre">Cierre<span>·</span>03:30 hrs</p>
         </div>
 
       </div>
